@@ -58,9 +58,9 @@ integration input shipOut billOut errorOut = do
     async $ billingValidation i1 o3
     async $ inventoryValidation i2 o4
 
-    let aggStrat = (\a b -> a {isValid = isValid a && isValid b
+    let aggStrat = (\a b -> a { isValid = isValid a && isValid b
                               , vldBill = vldBill a || vldBill b
-                              , vldInv = vldInv a || vldInv b})
+                              , vldInv = vldInv a || vldInv b })
     let complete = (\a -> vldBill a && vldInv a)
 
     async $ runEffect $ fromInput input >-> toOutput (o1 <> o2)
